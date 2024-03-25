@@ -14,17 +14,17 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("/api/v1")
 public class LoginController {
 
-    private final UsuarioService service;
+	private final UsuarioService service;
 
-    public LoginController(UsuarioService service) {
-        this.service = service;
-    }
-	
-    @PostMapping("/login")
-    public GenericResponse<UsuarioP> login(HttpServletRequest request){
-        String usuario = request.getParameter("usuario");
-        String password = request.getParameter("password");
-        return this.service.login(usuario, password);
-    }
-	
+	public LoginController(UsuarioService service) {
+		this.service = service;
+	}
+
+	@PostMapping("/login")
+	public GenericResponse<UsuarioP> login(HttpServletRequest request) {
+		String usuario = request.getParameter("usuario");
+		String password = request.getParameter("password");
+		return this.service.login(usuario, password);
+	}
+
 }

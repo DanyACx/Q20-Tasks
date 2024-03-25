@@ -1,8 +1,8 @@
 package com.quipucamayoc.Q20Tasks.security;
 
+import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.security.Key;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -15,7 +15,8 @@ public final class PasswordHasher {
 	private static final String ALGORITHM = "HmacSHA512";
 
 	/**
-	 * Longitud del <code>salt</code>. Igual al tamaÃƒÂ±o del resultado del algoritmo.
+	 * Longitud del <code>salt</code>. Igual al tamaÃƒÂ±o del resultado del
+	 * algoritmo.
 	 */
 	private static final int SALT_LENGTH = 64;
 
@@ -30,7 +31,8 @@ public final class PasswordHasher {
 	private static final String CHARSET_NAME = "UTF-8";
 
 	/**
-	 * Representa el resultado de una operaciÃƒÂ³n de <code>hash</code> con <code>salt</code>.
+	 * Representa el resultado de una operaciÃƒÂ³n de <code>hash</code> con
+	 * <code>salt</code>.
 	 *
 	 * @author Jose Manuel Cejudo Gausi
 	 */
@@ -49,10 +51,8 @@ public final class PasswordHasher {
 		/**
 		 * Construye una nueva instancia con los valores indicados.
 		 *
-		 * @param hash
-		 *            el valor de <code>hash</code>.
-		 * @param salt
-		 *            el valor de <code>salt</code>.
+		 * @param hash el valor de <code>hash</code>.
+		 * @param salt el valor de <code>salt</code>.
 		 */
 		private PasswordHash(final byte[] hash, final byte[] salt) {
 
@@ -71,7 +71,7 @@ public final class PasswordHasher {
 			return hash;
 
 		}
-		
+
 		public String getHashString() {
 
 			return HelperString.bytesToHex(hash);
@@ -92,7 +92,8 @@ public final class PasswordHasher {
 	}
 
 	/**
-	 * Constructor privado para impedir la instanciaciÃƒÂ³n de esta clase de utilidad.
+	 * Constructor privado para impedir la instanciaciÃƒÂ³n de esta clase de
+	 * utilidad.
 	 */
 	private PasswordHasher() {
 
@@ -103,16 +104,16 @@ public final class PasswordHasher {
 	/**
 	 * Calcula el <code>hash</code> del valor indicado.
 	 * <p>
-	 * Este mÃƒÂ©todo genera un valor de <code>salt</code> aleatorio y lo utiliza para calcular
-	 * repetitivamente tantas operaciones de <code>hash</code> como indique {@link #ITERATIONS}.
+	 * Este mÃƒÂ©todo genera un valor de <code>salt</code> aleatorio y lo utiliza
+	 * para calcular repetitivamente tantas operaciones de <code>hash</code> como
+	 * indique {@link #ITERATIONS}.
 	 * <p>
-	 * El objeto {@link PasswordHash}devuelto contiene el <code>hash</code> calculado y el
-	 * <code>salt</code> generado.
+	 * El objeto {@link PasswordHash}devuelto contiene el <code>hash</code>
+	 * calculado y el <code>salt</code> generado.
 	 *
-	 * @param value
-	 *            el valor para el que calcular el <code>hash</code>.
+	 * @param value el valor para el que calcular el <code>hash</code>.
 	 * @return el resultado del cÃƒÂ¡lculo <code>hash</code>.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public static PasswordHash hash(final String value) throws Exception {
 
@@ -125,17 +126,16 @@ public final class PasswordHasher {
 	}
 
 	/**
-	 * Calcula el <code>hash</code> del valor indicado usando el <code>salt</code> indicado.
+	 * Calcula el <code>hash</code> del valor indicado usando el <code>salt</code>
+	 * indicado.
 	 * <p>
-	 * El objeto {@link PasswordHash}devuelto contiene el <code>hash</code> calculado y el
-	 * <code>salt</code> generado.
+	 * El objeto {@link PasswordHash}devuelto contiene el <code>hash</code>
+	 * calculado y el <code>salt</code> generado.
 	 *
-	 * @param value
-	 *            el valor para el que calcular el <code>hash</code>.
-	 * @param salt
-	 *            el valor de <code>salt</code> a utilizar.
+	 * @param value el valor para el que calcular el <code>hash</code>.
+	 * @param salt  el valor de <code>salt</code> a utilizar.
 	 * @return el resultado del cÃƒÂ¡lculo <code>hash</code>.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private static PasswordHash hash(final String value, final byte[] salt) throws Exception {
 
@@ -158,22 +158,20 @@ public final class PasswordHasher {
 	}
 
 	/**
-	 * Comprueba si el <code>hash</code> calculado para el valor y el <code>salt</code> indicados es
-	 * igual al <code>hash</code> correcto indicado.
+	 * Comprueba si el <code>hash</code> calculado para el valor y el
+	 * <code>salt</code> indicados es igual al <code>hash</code> correcto indicado.
 	 * <p>
-	 * Este mÃƒÂ©todo permite comprobar si un valor es integro con respecto al <code>hash</code>.
+	 * Este mÃƒÂ©todo permite comprobar si un valor es integro con respecto al
+	 * <code>hash</code>.
 	 *
-	 * @param value
-	 *            el valor a comprobar.
-	 * @param correctHash
-	 *            el <code>hash</code> correcto.
-	 * @param salt
-	 *            el <code>salt</code> a utilizar para la generaciÃƒÂ³n del <code>hash</code> de
-	 *            <code>value</code>. Debe ser el mismo que el utilizado para calcular
-	 *            <code>hash</code>.
-	 * @return <code>true</code> si el <code>hash</code> de <code>value</code> usando
-	 *         <code>salt</code> es igual a <code>correctHash</code>.
-	 * @throws Exception 
+	 * @param value       el valor a comprobar.
+	 * @param correctHash el <code>hash</code> correcto.
+	 * @param salt        el <code>salt</code> a utilizar para la generaciÃƒÂ³n del
+	 *                    <code>hash</code> de <code>value</code>. Debe ser el mismo
+	 *                    que el utilizado para calcular <code>hash</code>.
+	 * @return <code>true</code> si el <code>hash</code> de <code>value</code>
+	 *         usando <code>salt</code> es igual a <code>correctHash</code>.
+	 * @throws Exception
 	 */
 	public static boolean isValid(final String value, final byte[] correctHash, final byte[] salt) throws Exception {
 
@@ -183,31 +181,29 @@ public final class PasswordHasher {
 	}
 
 	/**
-	 * Comprueba si el <code>hash</code> calculado para el valor y el <code>salt</code> indicados es
-	 * igual al <code>hash</code> correcto indicado.
+	 * Comprueba si el <code>hash</code> calculado para el valor y el
+	 * <code>salt</code> indicados es igual al <code>hash</code> correcto indicado.
 	 * <p>
-	 * Este mÃƒÂ©todo permite comprobar si un valor es integro con respecto al <code>hash</code>.
+	 * Este mÃƒÂ©todo permite comprobar si un valor es integro con respecto al
+	 * <code>hash</code>.
 	 *
-	 * @param value
-	 *            el valor a comprobar.
-	 * @param correctHash
-	 *            el <code>hash</code> correcto.
-	 * @param salt
-	 *            el <code>salt</code> a utilizar para la generaciÃƒÂ³n del <code>hash</code> de
-	 *            <code>value</code>. Debe ser el mismo que el utilizado para calcular
-	 *            <code>hash</code>.
-	 * @return <code>true</code> si el <code>hash</code> de <code>value</code> usando
-	 *         <code>salt</code> es igual a <code>correctHash</code>.
+	 * @param value       el valor a comprobar.
+	 * @param correctHash el <code>hash</code> correcto.
+	 * @param salt        el <code>salt</code> a utilizar para la generaciÃƒÂ³n del
+	 *                    <code>hash</code> de <code>value</code>. Debe ser el mismo
+	 *                    que el utilizado para calcular <code>hash</code>.
+	 * @return <code>true</code> si el <code>hash</code> de <code>value</code>
+	 *         usando <code>salt</code> es igual a <code>correctHash</code>.
 	 */
 	public static boolean isValid(final String value, final String correctHash, final String salt) {
 		try {
 			final PasswordHash ph;
 			ph = hash(value, HelperString.hexToBytes(salt));
-			//System.out.println("Cadena 1: " + ph);
-			//System.out.println("Cadena 2: " + correctHash);
+			// System.out.println("Cadena 1: " + ph);
+			// System.out.println("Cadena 2: " + correctHash);
 			return ph.getHashString().equals(correctHash);
 		} catch (Exception e) {
-			//System.out.println(e.getMessage());
+			// System.out.println(e.getMessage());
 			return false;
 		}
 

@@ -10,7 +10,7 @@ public final class HelperString {
 		}
 		return bytes;
 	}
-	
+
 	public static String bytesToHex(final byte[] bytes) {
 		StringBuilder sb = new StringBuilder(bytes.length * 2);
 		for (byte b : bytes)

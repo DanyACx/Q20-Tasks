@@ -9,7 +9,6 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Setter
 @Getter
 @Entity
@@ -18,9 +17,9 @@ public class FileHeader {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_fileheader")
-    private Integer idFileHeader;
+	@Column(name = "id_fileheader")
+	private Integer idFileHeader;
 
-    @Column(name = "titu_fheader", length = 100)
-    private String tituFheader;
+	@Column(name = "titu_fheader", length = 100)
+	private String tituFheader;
 }

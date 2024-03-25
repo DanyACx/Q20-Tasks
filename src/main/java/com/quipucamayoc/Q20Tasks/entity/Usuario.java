@@ -21,54 +21,54 @@ import lombok.Setter;
 public class Usuario {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_user_auth")
 	private Integer idUserAuth;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
 	private Persona persona;
-	
+
 	@Column(name = "user_name")
 	private String userName;
-	
+
 	@Column(name = "locked")
 	private Integer locked;
-	
+
 	@Column(name = "expired")
 	private Integer expired;
-	
+
 	@Column(name = "last_logon_date")
 	private OffsetDateTime lastLogonDate;
-	
+
 	@Column(name = "last_change_password_date")
 	private OffsetDateTime lastChangePasswordDate;
-	
+
 	@Column(name = "failed_login_attempts")
 	private Integer failedLoginAttempts;
-	
+
 	@Column(name = "secret_question", length = 510)
 	private String secretQuestion;
-	
+
 	@Column(name = "secret_answer", length = 510)
 	private String secretAnswer;
-	
-	@Column(name = "password" , length = 510)
+
+	@Column(name = "password", length = 510)
 	private String password;
-	
+
 	@Column(name = "password_salt", length = 510)
 	private String passwordSalt;
-	
+
 	@Column(name = "expired_date")
 	private LocalDate expiredDate;
-	
+
 	@Column(name = "observation")
 	private String observation;
-	
+
 	@Column(name = "id_authentication_type")
 	private Integer idAuthenticationType;
-	
+
 	@Column(name = "guid_user_auth")
 	private String guidUserAuth;
-	
+
 }
