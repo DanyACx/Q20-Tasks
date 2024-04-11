@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quipucamayoc.Q20Tasks.entity.Usuario;
+import com.quipucamayoc.Q20Tasks.projections.UsuarioAuthP;
 import com.quipucamayoc.Q20Tasks.projections.UsuarioP;
 
 @Repository
@@ -25,5 +26,17 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 			+ "INNER JOIN bytsscom_bytcore.vw_users us ON us.id_user_auth = ua.id_user_auth "
 			+ "LEFT JOIN bytsscom_bytcore.vw_persona pe ON pe.id_persona = ua.id_persona "
 			+ "WHERE UPPER(ua.user_name) = UPPER(:usuario) ", nativeQuery = true)
-	UsuarioP getUsuario(@Param("usuario") String usuario);
+	UsuarioAuthP getUsuarioAuth(@Param("usuario") String usuario);
+	
+	@Query(value = "SELECT id_user_auth AS idUserAuth, id_persona AS idPersona, user_name AS userName, full_name_per AS fullNamePer,"
+			+ "id_area AS idArea, area_display_name AS areaName,"
+			+ "bytsscom_bytcore.get_anio_proceso() AS idAnioProceso,"
+			+ "bytsscom_bytcore.get_configuration ('sig.mon') AS idMonedaNac,"
+			+ "id_unidad AS idUnidad, nomb_unidad AS nombUnidad "
+			+ "FROM bytsscom_bytcore.vw_users "
+			+ "WHERE id_user_auth = :iduserauth", nativeQuery = true)
+	UsuarioP getUsuario(@Param("iduserauth") String idUserAuth);
+	
+	@Query(value = "select * from bytsscom_bytcore.user_auth_app where user_name = :username", nativeQuery = true)
+	Optional<Usuario> getUserName(@Param("username") String username);
 }

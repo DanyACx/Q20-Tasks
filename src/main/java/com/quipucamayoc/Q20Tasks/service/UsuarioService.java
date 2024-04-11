@@ -7,9 +7,8 @@ import static com.quipucamayoc.Q20Tasks.utils.Global.TIPO_AUTH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.quipucamayoc.Q20Tasks.projections.UsuarioP;
+import com.quipucamayoc.Q20Tasks.projections.UsuarioAuthP;
 import com.quipucamayoc.Q20Tasks.repository.UsuarioRepository;
-import com.quipucamayoc.Q20Tasks.security.PasswordHasher;
 import com.quipucamayoc.Q20Tasks.utils.GenericResponse;
 
 import jakarta.transaction.Transactional;
@@ -26,14 +25,26 @@ public class UsuarioService {
 	}
 
 	// Método para iniciar sesión
-	public GenericResponse<UsuarioP> login(String usuario, String password) {
+	public GenericResponse<UsuarioAuthP> login(String usuario, String password) {
 
-		UsuarioP usuariop = repository.getUsuario(usuario);
+		UsuarioAuthP usuarioAuthP = repository.getUsuarioAuth(usuario);
 
-		if (PasswordHasher.isValid(password, usuariop.getPassword(), usuariop.getPasswordSalt())) {
-			return new GenericResponse<>(TIPO_AUTH, RPTA_OK, "Haz iniciado sesión correctamente", usuariop);
+		if (usuarioAuthP != null) {
+			if (usuarioAuthP.getLocked() == 0) {
+				//if (PasswordHasher.isValid(password, usuarioAuthP.getPassword(), usuarioAuthP.getPasswordSalt())) {
+					
+					
+					return new GenericResponse<>(TIPO_AUTH, RPTA_OK, "Haz iniciado sesión correctamente", usuarioAuthP);
+				//} else {
+				//	return new GenericResponse<>(TIPO_AUTH, RPTA_WARNING, "Contraseña incorrecta, vuelva a intentar", null);
+				//}
+			}else {
+				return new GenericResponse<>(TIPO_AUTH, RPTA_WARNING, "Cuenta bloqueada", null);
+			}
+
 		} else {
-			return new GenericResponse<>(TIPO_AUTH, RPTA_WARNING, "Lo sentimos, ese usuario no existe", null);
+			return new GenericResponse<>(TIPO_AUTH, RPTA_WARNING, "Usuario no registrado en el sistema", null);
 		}
+
 	}
 }

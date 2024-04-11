@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quipucamayoc.Q20Tasks.projections.UsuarioP;
+import com.quipucamayoc.Q20Tasks.projections.UsuarioAuthP;
 import com.quipucamayoc.Q20Tasks.service.UsuarioService;
 import com.quipucamayoc.Q20Tasks.utils.GenericResponse;
 
@@ -21,7 +21,7 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")
-	public GenericResponse<UsuarioP> login(HttpServletRequest request) {
+	public GenericResponse<UsuarioAuthP> login(HttpServletRequest request) {
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
 		return this.service.login(usuario, password);
