@@ -38,7 +38,7 @@ public class JwtUtils {
 	public boolean isTokenValid(String token) {
 		try {
 			Jwts.parserBuilder()
-					.setSigningKey(getSignatureKey())
+					.setSigningKey(getSignatureKey()) // para verificar si la firma es correcta
 					.build()
 					.parseClaimsJws(token)
 					.getBody();

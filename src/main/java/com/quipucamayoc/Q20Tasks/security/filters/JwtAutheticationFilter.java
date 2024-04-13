@@ -12,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quipucamayoc.Q20Tasks.entity.Usuario;
 import com.quipucamayoc.Q20Tasks.security.jwt.JwtUtils;
@@ -55,7 +54,7 @@ public class JwtAutheticationFilter extends UsernamePasswordAuthenticationFilter
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		
-		User user = (User) authResult.getPrincipal();
+		User user = (User) authResult.getPrincipal(); // obtener detalles de usuario autenticado con exito
 		String token = jwtUtils.generateAccessToken(user.getUsername()); // Se genera el token de acceso
 		
 		response.addHeader("Authorization", token);

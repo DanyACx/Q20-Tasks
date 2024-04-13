@@ -52,6 +52,6 @@ public class Usuario {
 	
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = Rol.class)
 	@JoinTable(name = "user_role", schema = "bytsscom_bytcore", joinColumns = @JoinColumn(name = "id_user_auth"), inverseJoinColumns = @JoinColumn(name = "id_role"))
-	private Set<Rol> roles;
+	private Set<Rol> roles; // Set no permite tener elementos duplicados
 
 }
