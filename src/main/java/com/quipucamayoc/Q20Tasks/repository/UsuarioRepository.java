@@ -3,6 +3,7 @@ package com.quipucamayoc.Q20Tasks.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -39,4 +40,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	
 	@Query(value = "select * from bytsscom_bytcore.user_auth_app where user_name = :username", nativeQuery = true)
 	Optional<Usuario> getUserName(@Param("username") String username);
+	
+	@Modifying
+	@Query(value = "UPDATE bytsscom_bytcore.user_auth_app"
+			+ " SET password = :password"
+			+ " WHERE id_user_auth = :iduserauth", nativeQuery = true)
+	int crearUsuario(@Param("iduserauth") Integer idUserAuth, @Param("password") String password);
 }

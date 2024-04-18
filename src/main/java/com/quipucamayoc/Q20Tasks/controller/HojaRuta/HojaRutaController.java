@@ -15,4 +15,10 @@ public class HojaRutaController {
 		return "Bandeja de HR";
 	}
 	
+	@GetMapping("/reprogramar")
+	@PreAuthorize("hasAnyRole('BPM.ALM.REPROGRAMAR.SOLICITUD')")
+	public String reprogramar() {
+		return "Bandeja de Reprogramar";
+	}
+	
 }

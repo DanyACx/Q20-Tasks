@@ -29,7 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		Collection<? extends GrantedAuthority> authorities = usuario.getRoles()
 				.stream()
-				.map(role -> new SimpleGrantedAuthority("ROLE_".concat(role.getRoleCode()))) // "ROLE_".concat(role.getRoleCode()))
+				.filter(role -> role.getRoleCode() != null) // Filtrar roles con role_code no nulo
+				.map(role -> new SimpleGrantedAuthority("ROLE_".concat(role.getRoleCode())))
 				.collect(Collectors.toSet());
 		
 		return new User(usuario.getUserName(), usuario.getPassword(), true, true, true, true,

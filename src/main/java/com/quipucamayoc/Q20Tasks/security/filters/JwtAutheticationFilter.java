@@ -42,7 +42,7 @@ public class JwtAutheticationFilter extends UsernamePasswordAuthenticationFilter
 			username = usuario.getUserName();
 			password = usuario.getPassword();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(e); 
 		}
 		
 		UsernamePasswordAuthenticationToken autheticationToken = new UsernamePasswordAuthenticationToken(username, password);
