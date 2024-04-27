@@ -1,6 +1,8 @@
 package com.quipucamayoc.Q20Tasks.controller.Usuario;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,12 @@ public class UsuarioController {
 	public GenericResponse<?> createUser(@RequestBody UsuarioDTO usuarioDTO) {
 
 		return this.service.createUser(usuarioDTO);
+	}
+	
+	@GetMapping("/getDataUser")
+	@PreAuthorize("hasAnyRole('PUBLIC-ROLE')")
+	public GenericResponse<?> getDataUser(@Param("username") String username) {
+
+		return this.service.getDataUser(username);
 	}
 }

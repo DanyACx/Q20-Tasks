@@ -35,8 +35,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 			+ "bytsscom_bytcore.get_configuration ('sig.mon') AS idMonedaNac,"
 			+ "id_unidad AS idUnidad, nomb_unidad AS nombUnidad "
 			+ "FROM bytsscom_bytcore.vw_users "
-			+ "WHERE id_user_auth = :iduserauth", nativeQuery = true)
-	UsuarioP getUsuario(@Param("iduserauth") String idUserAuth);
+			+ "WHERE user_name = :username", nativeQuery = true)
+	UsuarioP getUsuario(@Param("username") String username);
 	
 	@Query(value = "select * from bytsscom_bytcore.user_auth_app where user_name = :username", nativeQuery = true)
 	Optional<Usuario> getUserName(@Param("username") String username);

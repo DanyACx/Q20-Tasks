@@ -61,8 +61,8 @@ public class JwtAutheticationFilter extends UsernamePasswordAuthenticationFilter
 		
 		Map<String, Object> httpResponse = new HashMap<>();
 		httpResponse.put("token", token);
-		httpResponse.put("Message", "Authentication Correcta");
-		httpResponse.put("Username", user.getUsername());
+		httpResponse.put("message", "Authentication Correcta");
+		httpResponse.put("username", user.getUsername());
 		
 		response.getWriter().write(new ObjectMapper().writeValueAsString(httpResponse));
 		response.setStatus(HttpStatus.OK.value());

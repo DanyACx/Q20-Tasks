@@ -20,6 +20,6 @@ public interface UsuarioP {
 
 	Integer getIdUnidad();
 
-	Integer getNombUnidad();
+	String getNombUnidad();
 
 }
