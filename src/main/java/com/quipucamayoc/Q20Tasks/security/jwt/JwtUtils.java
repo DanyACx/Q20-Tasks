@@ -2,6 +2,7 @@ package com.quipucamayoc.Q20Tasks.security.jwt;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +26,10 @@ public class JwtUtils {
 	private String timeExpiration;
 	
 	// Generar token de acceso
-	public String generateAccessToken(String username) {
+	public String generateAccessToken(String username, Map<String, Object> dataUsuario) {
 		return Jwts.builder()
 				.setSubject(username)
+				.addClaims(dataUsuario)
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + Long.parseLong(timeExpiration)))
 				.signWith(getSignatureKey(), SignatureAlgorithm.HS256)

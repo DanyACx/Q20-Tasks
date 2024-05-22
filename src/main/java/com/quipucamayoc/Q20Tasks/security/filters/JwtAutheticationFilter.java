@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.quipucamayoc.Q20Tasks.entity.Usuario;
+import com.quipucamayoc.Q20Tasks.projections.UsuarioP;
+import com.quipucamayoc.Q20Tasks.repository.UsuarioRepository;
 import com.quipucamayoc.Q20Tasks.security.jwt.JwtUtils;
 
 import jakarta.servlet.FilterChain;
@@ -25,8 +28,12 @@ public class JwtAutheticationFilter extends UsernamePasswordAuthenticationFilter
 
 	private JwtUtils jwtUtils;
 	
-	public JwtAutheticationFilter(JwtUtils jwtUtils) {
+	@Autowired
+	private UsuarioRepository usuarioReporsitory;
+	
+	public JwtAutheticationFilter(JwtUtils jwtUtils, UsuarioRepository usuarioReporsitory) {
 		this.jwtUtils = jwtUtils;
+		this.usuarioReporsitory = usuarioReporsitory;
 	}
 	
 	@Override
@@ -55,7 +62,21 @@ public class JwtAutheticationFilter extends UsernamePasswordAuthenticationFilter
 			Authentication authResult) throws IOException, ServletException {
 		
 		User user = (User) authResult.getPrincipal(); // obtener detalles de usuario autenticado con exito
-		String token = jwtUtils.generateAccessToken(user.getUsername()); // Se genera el token de acceso
+		
+		UsuarioP usuarioP = usuarioReporsitory.getUsuario(user.getUsername());
+		Map<String, Object> dataUsuario = new HashMap<>();
+		dataUsuario.put("iduserauth", usuarioP.getIdUserAuth());
+		dataUsuario.put("idunidad", usuarioP.getIdUnidad());
+		dataUsuario.put("fullnameper", usuarioP.getFullNamePer());
+		dataUsuario.put("idarea", usuarioP.getIdArea());
+		dataUsuario.put("areaname", usuarioP.getAreaName());
+		dataUsuario.put("idanioproceso", usuarioP.getIdAnioProceso());
+		dataUsuario.put("idmonedanac", usuarioP.getIdMonedaNac());
+		dataUsuario.put("idpersona", usuarioP.getIdPersona());
+		dataUsuario.put("nombunidad", usuarioP.getNombUnidad());
+		dataUsuario.put("username", usuarioP.getUserName());
+		
+		String token = jwtUtils.generateAccessToken(user.getUsername(), dataUsuario); // Se genera el token de acceso
 		
 		response.addHeader("Authorization", token);
 		
