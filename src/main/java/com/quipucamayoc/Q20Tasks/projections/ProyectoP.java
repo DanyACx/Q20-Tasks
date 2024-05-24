@@ -1,5 +1,7 @@
 package com.quipucamayoc.Q20Tasks.projections;
 
+import java.math.BigDecimal;
+
 public interface ProyectoP {
 
 	Integer getIdProyecto();
@@ -47,4 +49,27 @@ public interface ProyectoP {
 	String getClavesProy();
 	
 	String getImportFechUpdate();
+	
+	String getDescPpto();
+	
+	Integer getIdClasificador();
+	
+	String getCodClasif();
+	
+	String getTipoPpto();
+	
+	Integer getIdCorrPpto();
+	
+	BigDecimal getRdr();
+	
+	BigDecimal getRa();
+	
+	BigDecimal getR18();
+	
+	BigDecimal getRnp();
+	
+	BigDecimal getMontoPpto();
+	
+	Integer getIdAnio();
+	
 }

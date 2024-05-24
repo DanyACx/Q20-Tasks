@@ -33,4 +33,39 @@ private final ProyectoService proyectoService;
 		
 		return this.proyectoService.getDatosGenerales(idproyecto);
 	}
+	
+	@GetMapping("/getActividades/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getActividades(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getActividades(idproyecto);
+	}
+	
+	@GetMapping("/getEquipo/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getEquipo(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getEquipo(idproyecto);
+	}
+	
+	@GetMapping("/getMetasPresupuestales/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getMetasPresupuestales(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getMetasPresupuestales(idproyecto);
+	}
+	
+	@GetMapping("/getPresupuesto/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getPresupuesto(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getPresupuesto(idproyecto);
+	}
+	
+	@GetMapping("/getIngresos/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getIngresos(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getIngresos(idproyecto);
+	}
 }
