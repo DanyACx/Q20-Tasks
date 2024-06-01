@@ -1,10 +1,10 @@
 package com.quipucamayoc.Q20Tasks.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tarea_meta", schema = "bytsscom_bytsig")
 public class TareaMeta {
 
+	@Id
 	@Column(name = "id_tarea_meta")
 	private Integer idTareaMeta;
 	

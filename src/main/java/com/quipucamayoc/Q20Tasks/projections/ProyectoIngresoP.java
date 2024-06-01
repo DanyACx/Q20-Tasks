@@ -1,7 +1,10 @@
 package com.quipucamayoc.Q20Tasks.projections;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public interface ProyectoIngresoP {
 
@@ -11,9 +14,11 @@ public interface ProyectoIngresoP {
 	
 	String getIdConvenio();
 	
-	Date getFechRegIngreso();
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate getFechRegIngreso();
 	
-	Date getFechAutIngreso();
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate getFechAutIngreso();
 	
 	Integer getIdMoneda();
 	
@@ -31,11 +36,13 @@ public interface ProyectoIngresoP {
 	
 	String getAdministradoPor();
 	
-	Date getFechResolIngreso();
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate getFechResolIngreso();
 	
 	String getNumResolIngreso();
 	
-	Date getFechReciboIngreso();
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate getFechReciboIngreso();
 	
 	String getNumReciboIngreso();
 	

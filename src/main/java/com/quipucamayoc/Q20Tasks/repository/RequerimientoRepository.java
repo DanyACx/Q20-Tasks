@@ -68,4 +68,41 @@ public interface RequerimientoRepository extends JpaRepository<Requerimiento, In
 			"          ORDER BY "+
 			"            ex.num_expediente desc, mr.num_memo_requ desc ", nativeQuery = true)
 	List<RequerimientoP> getListRequerimientos(@Param("idanio") Integer idanio, @Param("fechsolrequ") Integer fechsolrequ, @Param("idunidad") Integer idunidad, @Param("areatipo") String areatipo, @Param("idfuente") Integer idfuente);
+	
+	@Query(value = "SELECT "+
+			"          mr.id_memo_requerimiento AS idMemoRequerimiento, "+
+			"      mr.id_area AS idArea, "+
+			"      mr.id_user_reg_requ AS idUserRegRequ, "+
+			"      mr.fech_sol_requ AS fechSolRequ, "+
+			"      mr.asunto_requ AS asuntoRequ, "+
+			"      mr.esta_requ AS estaRequ, "+
+			"      mr.id_anio AS idAnio, "+
+			"      mr.num_memo_requ AS numMemoRequ, "+
+			"      mr.id_user_solrequ AS idUserSolRequ, "+
+			"      mr.id_memo_tipo AS idMemoTipo, "+
+			"      mr.tipo_memo AS tipoMemo, "+
+			"      mr.sys_fech_registro AS sysFechRegistro, "+
+			"      mr.id_proyecto AS idProyecto, "+
+			"          mr.id_fuente AS idFuente, "+
+			"          mr.origen_req AS origenReq, "+
+			"          mr.origen_id AS origenId, "+
+			"          mr.nomb_esta_requ AS nombEstaRequ, "+
+			"          mr.abre_fuente AS abreFuente, "+
+			"          mri.montsolreq AS montsolreq "+
+			"FROM      bytsscom_bytsig.vw_memo_requerimiento mr "+
+			//"LEFT JOIN bytsscom_bytcore.bpm_task bpm "+
+			//"ON        bpm.process_key ='proyecto_req' "+
+			//"AND       bpm.business_key = mr.id_memo_requerimiento::text "+
+			"LEFT JOIN "+
+			"          ( "+
+			"                   SELECT   mri.id_memo_requerimiento, "+
+			"                            SUM(mri.mont_total_item) AS montsolreq "+
+			"                   FROM     bytsscom_bytsig.memo_requerimiento_item mri "+
+			"                   GROUP BY mri.id_memo_requerimiento ) mri "+
+			"ON        mri.id_memo_requerimiento = mr.id_memo_requerimiento "+
+			"WHERE     mr.id_proyecto = :idproyecto "+
+			"AND       mr.origen_req = 'PROYECTO' "+
+			"AND       mr.esta_requ != 'X' "+
+			"ORDER BY  mr.fech_sol_requ DESC ", nativeQuery = true)
+	List<RequerimientoP> getRequerimientoProyecto(@Param("idproyecto") Integer idproyecto);
 }

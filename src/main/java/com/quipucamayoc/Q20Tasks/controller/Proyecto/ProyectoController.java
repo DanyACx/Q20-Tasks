@@ -68,4 +68,18 @@ private final ProyectoService proyectoService;
 		
 		return this.proyectoService.getIngresos(idproyecto);
 	}
+	
+	@GetMapping("/getRequerimientos/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getRequerimientos(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getRequerimiento(idproyecto);
+	}
+	
+	@GetMapping("/getEjecucion/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getEjecucion(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getEjecucion(idproyecto);
+	}
 }

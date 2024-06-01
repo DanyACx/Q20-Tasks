@@ -1,6 +1,9 @@
 package com.quipucamayoc.Q20Tasks.projections;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public interface ProyectoP {
 
@@ -16,7 +19,8 @@ public interface ProyectoP {
 	
 	String getEstProy();
 	
-	String getSysFechRegistro();
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	LocalDate getFechaRegistro();
 	
 	String getIdConvenio();
 	
@@ -28,7 +32,7 @@ public interface ProyectoP {
 	
 	String getFechFinProy();
 	
-	String getMontoTotalProy();
+	BigDecimal getMontoTotalProy();
 	
 	String getFormatoConv();
 	
@@ -48,6 +52,7 @@ public interface ProyectoP {
 	
 	String getClavesProy();
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	String getImportFechUpdate();
 	
 	String getDescPpto();
@@ -71,5 +76,23 @@ public interface ProyectoP {
 	BigDecimal getMontoPpto();
 	
 	Integer getIdAnio();
+	
+	String getNameCoordinador();
+	
+	String getCodUnidadCoordinadorProy();
+	
+	String getNombUnidadCoordinadorProy();
+	
+	Integer getIdUnidadCoordinador();
+	
+	Integer getIdAreaCoordinador();
+	
+	String getEmailCoordinador();
+	
+	String getCodUnidadCoordinador();
+	
+	String getNombUnidadCoordinador();
+	
+	String getTipoProyecto();
 	
 }

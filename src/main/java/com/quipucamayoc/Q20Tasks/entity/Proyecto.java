@@ -1,5 +1,7 @@
 package com.quipucamayoc.Q20Tasks.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -76,7 +78,7 @@ public class Proyecto {
 	private String estProy;
 	
 	@Column(name = "sys_fech_registro")
-	private String sysFechRegistro;
+	private LocalDate sysFechRegistro;
 	
 	@Column(name = "id_area_investigacion")
 	private Integer idAreaInvestigacion;

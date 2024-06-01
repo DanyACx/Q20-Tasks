@@ -31,7 +31,7 @@ public interface ProyectoIngresoRepository extends JpaRepository<ProyectoIngreso
 			"       ori.ano_transferencia || '-' || ori.sec_ejec_origen || '-' || ori.transferencia || '-' || ori.secuencia_transferencia AS numTransferenciaDisplay2 "+
 			"FROM bytsscom_bytsig.vw_proyecto_ingreso pi "+
 			"LEFT JOIN bytsscom_bytcore.bpm_task bpm ON bpm.process_key = 'proyecto_ingreso' "+
-			"AND bpm.business_key = pi.id_proyecto::text||'-'||pi.id_corr_ingreso::text "+
+			"AND bpm.business_key = (SELECT CAST(pi.id_proyecto AS text))||'-'||(SELECT CAST(pi.id_corr_ingreso AS text)) "+
 			"LEFT JOIN bytsscom_bytcore.fuente f ON f.id_fuente = pi.id_fuente "+
 			"LEFT JOIN bytsscom_bytsiaf.transferencia_origen ori ON (pi.num_transferencia = ori.transferencia_financiera_id) "+
 			"WHERE pi.id_proyecto = :idproyecto "+
