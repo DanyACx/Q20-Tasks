@@ -125,6 +125,6 @@ public interface ProyectoRepository extends JpaRepository<Proyecto, Integer> {
 			"          ppto.tipo_ppto, "+
 			"          ppto.id_corr_ppto, "+
 			"          ppto.id_anio "+
-			"  ORDER BY ppto.id_anio DESC ", nativeQuery = true)
+			"  ORDER BY ppto.id_corr_ppto ", nativeQuery = true)
 	List<ProyectoP> getPresupuesto(@Param("idproyecto") Integer idproyecto);
 }

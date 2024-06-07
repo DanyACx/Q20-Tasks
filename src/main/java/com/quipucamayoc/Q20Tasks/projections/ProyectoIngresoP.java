@@ -66,5 +66,7 @@ public interface ProyectoIngresoP {
 	
 	String getNumTransferencia();
 	
-	String getNumTransferenciaTisplay();
+	String getNumTransferenciaDisplay1();
+	
+	String getAbreFuente();
 }

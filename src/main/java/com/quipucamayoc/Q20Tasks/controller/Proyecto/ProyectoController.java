@@ -82,4 +82,11 @@ private final ProyectoService proyectoService;
 		
 		return this.proyectoService.getEjecucion(idproyecto);
 	}
+	
+	@GetMapping("/getGraficoEjecucion/{idproyecto}")
+	@PreAuthorize("hasAnyRole('USUARIO-PROYECTO-INTERNO', 'USUARIO-PROYECTO-EXTERNO')")
+	public GenericResponse<?> getGraficoEjecucion(@PathVariable Integer idproyecto) {
+		
+		return this.proyectoService.getGraficoEjecucion(idproyecto);
+	}
 }

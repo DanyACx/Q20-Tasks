@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.quipucamayoc.Q20Tasks.projections.GraficoEjecucionP;
 import com.quipucamayoc.Q20Tasks.projections.ProyectoActividadP;
 import com.quipucamayoc.Q20Tasks.projections.ProyectoEjecucionP;
 import com.quipucamayoc.Q20Tasks.projections.ProyectoEquipoP;
@@ -17,6 +18,7 @@ import com.quipucamayoc.Q20Tasks.projections.ProyectoIngresoP;
 import com.quipucamayoc.Q20Tasks.projections.ProyectoP;
 import com.quipucamayoc.Q20Tasks.projections.RequerimientoP;
 import com.quipucamayoc.Q20Tasks.projections.TareaMetaP;
+import com.quipucamayoc.Q20Tasks.repository.GraficoEjecucionRepository;
 import com.quipucamayoc.Q20Tasks.repository.ProyectoActividadRepository;
 import com.quipucamayoc.Q20Tasks.repository.ProyectoEjecucionRepository;
 import com.quipucamayoc.Q20Tasks.repository.ProyectoEquipoRepository;
@@ -52,11 +54,15 @@ public class ProyectoService {
 	
 	@Autowired
 	private ProyectoEjecucionRepository proyectoEjecucionRepository;
+	
+	@Autowired
+	private GraficoEjecucionRepository graficoEjecucionRepository;
 
 	public ProyectoService(ProyectoRepository proyectoRepository,
 			ProyectoActividadRepository proyectoActividadRepository, ProyectoEquipoRepository proyectoEquipoRepository,
 			TareaMetaRepository tareaMetaRepository, ProyectoIngresoRepository proyectoIngresoRepository,
-			RequerimientoRepository requerimientoRepository, ProyectoEjecucionRepository proyectoEjecucionRepository) {
+			RequerimientoRepository requerimientoRepository, ProyectoEjecucionRepository proyectoEjecucionRepository, 
+			GraficoEjecucionRepository graficoEjecucionRepository) {
 		this.proyectoRepository = proyectoRepository;
 		this.proyectoActividadRepository = proyectoActividadRepository;
 		this.proyectoEquipoRepository = proyectoEquipoRepository;
@@ -64,6 +70,7 @@ public class ProyectoService {
 		this.proyectoIngresoRepository = proyectoIngresoRepository;
 		this.requerimientoRepository = requerimientoRepository;
 		this.proyectoEjecucionRepository = proyectoEjecucionRepository;
+		this.graficoEjecucionRepository = graficoEjecucionRepository;
 	}
 
 	public GenericResponse<?> getListProyectos(Integer idpersona) {
@@ -171,6 +178,18 @@ public class ProyectoService {
 		getEjecucion.put("Ejecucion", ejecucion);
 
 		return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Ejecucion", getEjecucion);
+
+	}
+	
+	public GenericResponse<?> getGraficoEjecucion(Integer idproyecto) {
+
+		GraficoEjecucionP graficoEjecucion = graficoEjecucionRepository.getTotalEjecucion(idproyecto);
+
+		Map<String, Object> getGraficoEjecucion = new HashMap<>();
+
+		getGraficoEjecucion.put("GraficoEjecucion", graficoEjecucion);
+
+		return new GenericResponse<>(TIPO_DATA, RPTA_OK, "Grafico Ejecucion", getGraficoEjecucion);
 
 	}
 
